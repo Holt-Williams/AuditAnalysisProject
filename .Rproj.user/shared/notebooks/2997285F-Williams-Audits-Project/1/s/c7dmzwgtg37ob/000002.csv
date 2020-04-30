@@ -1,0 +1,6 @@
+"0","label<-""GxP Area"""
+"0","counts<- count(GWP,vars=GxP.Area)"
+"0","percent<-prop.table(counts$n)"
+"0","df<-as.data.frame(counts)"
+"0","df$perc<-percent"
+"0","df"

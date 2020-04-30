@@ -1,0 +1,6 @@
+"0","label<-""In USA or OUS"""
+"0","counts<- count(GWP,vars=In.USA.or.OUS)"
+"0","percent<-prop.table(counts$n)"
+"0","df<-as.data.frame(counts)"
+"0","df$perc<-percent"
+"0","df"

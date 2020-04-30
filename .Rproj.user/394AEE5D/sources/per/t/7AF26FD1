@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588006977714.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3064149128",
+    "id" : "7AF26FD1",
+    "lastKnownWriteTime" : 1588014985,
+    "last_content_update" : 1588014985453,
+    "path" : "~/NorthEastern/NorthEasternCLASSES/ALY 6000 Intro to Analytics/AuiditProject/Williams-Audit-Project.R",
+    "project_path" : "Williams-Audit-Project.R",
+    "properties" : {
+        "cursorPosition" : "8,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
