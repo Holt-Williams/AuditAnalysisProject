@@ -848,3 +848,21 @@ output%>%summary()
 
   While the above are reasons to not merge the datasets, it might be useful to merge them for the ease of data analysis. If the merged datasets contain an extra column with a variable indicating its origin, automated analysis would likely be easier as a simple filter can choose which data set to depict.
 
+
+
+## Conclusion
+
+This project was made for ALY6000 as part of the Audit Analysis Project.
+
+Code can be found at https://github.com/Holt-Williams/AuditAnalysisProject 
+
+Thanks for reading!
+-G. Holt Williams
+
+
+
+
+
+
+
+
