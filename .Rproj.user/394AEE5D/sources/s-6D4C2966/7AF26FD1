@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588006977714.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4293414192",
+    "id" : "7AF26FD1",
+    "lastKnownWriteTime" : 1588355505,
+    "last_content_update" : 1588355505285,
+    "path" : "C:/Users/Holt/Desktop/github/AuditAnalysisProject/Williams-Audit-Project.R",
+    "project_path" : "Williams-Audit-Project.R",
+    "properties" : {
+        "cursorPosition" : "159,0",
+        "scrollLine" : "127",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

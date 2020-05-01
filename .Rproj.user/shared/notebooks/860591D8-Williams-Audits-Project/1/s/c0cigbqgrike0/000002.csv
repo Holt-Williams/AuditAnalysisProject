@@ -1,0 +1,6 @@
+"0","label<-""Audit Method"""
+"0","counts<- count(GWP,vars=Audit.Method)"
+"0","percent<-prop.table(counts$n)"
+"0","df<-as.data.frame(counts)"
+"0","df$perc<-percent"
+"0","df"

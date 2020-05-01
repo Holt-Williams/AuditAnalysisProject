@@ -1,0 +1,6 @@
+"0","##Read Data"
+"0","#Computerized System Quality Assurance"
+"0","CSQA<- read_excel(""CSQA_Audit_Data.xlsx"")"
+"0",""
+"0","#Good Workign Practice"
+"0","GWP<- read_excel(""GXP_Audit_Data.xlsx"")"

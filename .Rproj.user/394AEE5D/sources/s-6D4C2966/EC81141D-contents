@@ -1,0 +1,283 @@
+## This Script Holds the GWP R Markdown scripts
+### GWP Variables {.tabset}
+
+Here begins the analysis for the "Good Working Practices" Dataset: GWP
+
+1. Audit Status
+2. In USA or OUS
+3. GxP Area
+4. Audit Type
+5. Audit Method
+6. Proposed Quarter
+
+#### Audit Status
+
+
+```{r Audit Status, echo=FALSE}
+label<-"Audit Status"
+counts<- count(GWP,vars=Audit.Status)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=n),position=position_stack(vjust=0.5))+
+  coord_flip()+
+  labs(title=label,
+       subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
+       x=NULL)+
+  theme_fivethirtyeight()+
+  theme( axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
+
+df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
+  coord_flip()+
+  labs(title=label,
+       subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+       x=NULL)+
+  theme_fivethirtyeight()+
+  theme( axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
+```
+
+Audit Status is a useful variabel as it informs the reader about the possible status of the 96 Audits. Looking at the values we can see that only 4 of the 96 Audits have been completed. This can be useful to managers, for example a business leader might look at the 26 "Not in Scope" Audits and say this might be a good indicator that the people who ask for audits need a training to identify what the scope of an audit is.
+
+
+
+#### In USA or OUS
+
+
+
+```{r in USA or OUS, echo=FALSE}
+label<-"In USA or OUS"
+counts<- count(GWP,vars=In.USA.or.OUS)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=n),position=position_stack(vjust=0.5))+
+  coord_flip()+
+  labs(title=label,
+       subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
+       x=NULL)+
+  theme_fivethirtyeight()+
+  theme( axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
+
+df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
+  coord_flip()+
+  labs(title=label,
+       subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+       x=NULL)+
+  theme_fivethirtyeight()+
+  theme( axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
+```
+
+This analyses shows that audits are evenly split betweeen the USA and out of the USA. This suggests that the company has roughly even amounts of clients from the US versus outside of the US. In a business this variabel can be useful in conjucntion with others, such as the Audit Status, to show the diffrences in US Clients versus foreign clients.
+
+
+#### GxP Area
+
+
+
+```{r GxP Area, echo=FALSE}
+label<-"GxP Area"
+counts<- count(GWP,vars=GxP.Area)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=n),position=position_stack(vjust=0.5))+
+  coord_flip()+
+  labs(title=label,
+       subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
+       x=NULL)+
+  theme_fivethirtyeight()+
+  theme( axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
+
+df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+  geom_bar(stat="identity")+
+  geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
+  coord_flip()+
+  labs(title=label,
+       subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+       x=NULL)+
+  theme_fivethirtyeight()+
+  theme( axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.ticks = element_blank())
+```
+
+GxP Area is not a straight forward variable, and is better explained by the Data Directory:
+  
+  GCP: Good Clinical Practice audits
+GLP: Good Laboratory Practice audit  
+GMP: Good Manufacturing Practice, audits of manufacturing sites  
+GDP: Good Distribution Practice, audits of distribution and logistic partners  
+GVP: Good Vigilance Practice, Audits of pharmacovigilance service providers 
+
+Each of these values represent the type of audits being performed. The majority of the audits (69.8%) are in "Good Clinical Practice Audits" and "Good Manufacturing Practice." This suggests msot audits look at clinical practices and manufacturing practices, but may also suggest clients do not trust this company with as many other types of audits. While technically possible, the distirbution here may also just show the ratio of the diffrent types of audits that are performed (i.e. GDP Audits just aren't performed on a regular basis)'  
+
+#### Audit Type
+
+
+
+```{r Audit Type, echo=FALSE}
+label<-"Audit Type"
+counts<- count(GWP,vars=Audit.Type)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text(aes(label=n),position=position_stack(vjust=0.5))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+  
+  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+```
+
+Audit type is the first variable that has data that may be considerred "out of range." The unknown category lets managers know that data is being added without a category in audit types, but should likely not be included in the percentage analysis for this variable. It is fine to include it in the counts analysis as alerts managers to their existence. 
+
+#### Audit Type: Clean
+
+```{r Clean Audit Type, echo=FALSE}
+label<-"Audit Type"
+counts<- count(GWP%>%filter(Audit.Type!= "(Unknown)"),vars=Audit.Type)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+
+  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+```
+
+The above is the same Audit Type analysis without the existence of the (Unknown) label. The percentages do not change much, but give a clearer picture to the different type sof audits being performed. This particular variable looks to be tracking New qualifications versus requalification of previous audits, which may indicate repeat versus new customers or customer areas.
+
+
+
+#### Audit Method
+
+
+
+```{r Audit Method, echo=FALSE}
+label<-"Audit Method"
+counts<- count(GWP,vars=Audit.Method)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text(aes(label=n),position=position_stack(vjust=0.5))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+  
+  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text_repel(aes(label=scales::percent(percent)),
+                    position=position_stack(vjust=0.55),
+                    box.padding = unit(0.5, "lines"))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+```
+
+Audit Method can help decision makers decide how to appropiately staff auditers and to see what capabilties they can invest into the future. This variable can also be helped by performing some cleaning actions to it.
+
+#### Audit Method: Clean
+
+```{r Audit Method Clean, echo=FALSE}
+label<-"Audit Method"
+counts<- count(GWP%>%filter(Audit.Method != "(Unknown)",Audit.Method != "None"),vars=Audit.Method)
+percent<-prop.table(counts$n)
+df<-as.data.frame(counts)
+df$perc<-percent
+df
+df$dummy<-1
+df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text(aes(label=n),position=position_stack(vjust=0.5))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+  
+  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
+    geom_bar(stat="identity")+
+    geom_text_repel(aes(label=scales::percent(percent)),
+                    position=position_stack(vjust=0.55),
+                    box.padding = unit(0.5, "lines"))+
+    coord_flip()+
+    labs(title=label,
+         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
+         x=NULL)+
+    theme_fivethirtyeight()+
+    theme( axis.text.x = element_blank(),
+           axis.text.y = element_blank(),
+           axis.ticks = element_blank())
+```
