@@ -448,7 +448,7 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
            axis.ticks = element_blank())
 ```
 
-Audit Status is a useful variabel as it informs the reader about the possible status of the 96 Audits. Looking at the values we can see that only 4 of the 96 Audits have been completed. This can be useful to managers, for example a business leader might look at the 26 "Not in Scope" Audits and say this might be a good indicator that the people who ask for audits need a training to identify what the scope of an audit is.
+Audit Status is a useful variabel as it informs the reader about the possible status of the 12 Audits. Looking at the values we can see that 9 of the 12 Audits have been completed. This is sueful to managers so they can understadn the current work demands on their team
 
 
 
@@ -489,7 +489,7 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
            axis.ticks = element_blank())
 ```
 
-This analyses shows that audits are evenly split betweeen the USA and out of the USA. This suggests that the company has roughly even amounts of clients from the US versus outside of the US. In a business this variabel can be useful in conjucntion with others, such as the Audit Status, to show the diffrences in US Clients versus foreign clients.
+This analyses shows that CSQA audits are not evenly split betweeen the USA and out of the USA. This suggests that the company has more CSQA audits in the US versus outside of the US. In a business this variabel can be useful in conjucntion with others, such as the Audit Status, to show the diffrences in US Clients versus foreign clients.
 
 
 #### GxP Area
@@ -537,7 +537,7 @@ GMP: Good Manufacturing Practice, audits of manufacturing sites
 GDP: Good Distribution Practice, audits of distribution and logistic partners  
 GVP: Good Vigilance Practice, Audits of pharmacovigilance service providers 
 
-Each of these values represent the type of audits being performed. The majority of the audits (69.8%) are in "Good Clinical Practice Audits" and "Good Manufacturing Practice." This suggests msot audits look at clinical practices and manufacturing practices, but may also suggest clients do not trust this company with as many other types of audits. While technically possible, the distirbution here may also just show the ratio of the diffrent types of audits that are performed (i.e. GDP Audits just aren't performed on a regular basis)  
+Each of these values represent the type of audits being performed. The majority of the audits (83.3%) are in "GIS" which is not listed in the data dictionary which makes it difficult to understand what is shown. This would be a good reason to go back to the client to better understand their data.
 
 #### Audit Type
 
@@ -545,73 +545,6 @@ Each of these values represent the type of audits being performed. The majority 
 
 ```{r Audit Type, echo=FALSE}
 label<-"Audit Type"
-counts<- count(CSQA,vars=CSQA[[8]])
-percent<-prop.table(counts$n)
-df<-as.data.frame(counts)
-df$perc<-percent
-df
-df$dummy<-1
-df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
-    geom_bar(stat="identity")+
-    geom_text(aes(label=n),position=position_stack(vjust=0.5))+
-    coord_flip()+
-    labs(title=label,
-         subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
-         x=NULL)+
-    theme_fivethirtyeight()+
-    theme( axis.text.x = element_blank(),
-           axis.text.y = element_blank(),
-           axis.ticks = element_blank())
-  
-  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
-    geom_bar(stat="identity")+
-    geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
-    coord_flip()+
-    labs(title=label,
-         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
-         x=NULL)+
-    theme_fivethirtyeight()+
-    theme( axis.text.x = element_blank(),
-           axis.text.y = element_blank(),
-           axis.ticks = element_blank())
-```
-
-Audit type is the first variable that has data that may be considerred "out of range." The unknown category lets managers know that data is being added without a category in audit types, but should likely not be included in the percentage analysis for this variable. It is fine to include it in the counts analysis as alerts managers to their existence. 
-
-#### Audit Type: Clean
-
-```{r Clean Audit Type, echo=FALSE}
-label<-"Audit Type"
-counts<- count(CSQA%>%filter(CSQA[[8]]!= "(Unknown)"),vars=CSQA[[8]])
-percent<-prop.table(counts$n)
-df<-as.data.frame(counts)
-df$perc<-percent
-df
-df$dummy<-1
-
-  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
-    geom_bar(stat="identity")+
-    geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
-    coord_flip()+
-    labs(title=label,
-         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
-         x=NULL)+
-    theme_fivethirtyeight()+
-    theme( axis.text.x = element_blank(),
-           axis.text.y = element_blank(),
-           axis.ticks = element_blank())
-```
-
-The above is the same Audit Type analysis without the existence of the (Unknown) label. The percentages do not change much, but give a clearer picture to the different type sof audits being performed. This particular variable looks to be tracking New qualifications versus requalification of previous audits, which may indicate repeat versus new customers or customer areas.
-
-
-
-#### Audit Method
-
-
-
-```{r Audit Method, echo=FALSE}
-label<-"Audit Method"
 counts<- count(CSQA,vars=CSQA[[9]])
 percent<-prop.table(counts$n)
 df<-as.data.frame(counts)
@@ -632,9 +565,7 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
   
   df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
     geom_bar(stat="identity")+
-    geom_text_repel(aes(label=scales::percent(percent)),
-                    position=position_stack(vjust=0.55),
-                    box.padding = unit(0.5, "lines"))+
+    geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
     coord_flip()+
     labs(title=label,
          subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
@@ -645,13 +576,15 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
            axis.ticks = element_blank())
 ```
 
-Audit Method can help decision makers decide how to appropiately staff auditers and to see what capabilties they can invest into the future. This variable can also be helped by performing some cleaning actions to it.
+This particular variable looks to be tracking New qualifications versus requalification of previous audits, which may indicate repeat versus new customers or customer areas.
 
-#### Audit Method: Clean
+#### Audit Method
 
-```{r Audit Method Clean, echo=FALSE}
+*Audit Type and Audit Method variables are mislabelled as each other in the CSQA dataset. This is fixed in this analysis
+
+```{r Audit Method, echo=FALSE}
 label<-"Audit Method"
-counts<- count(CSQA%>%filter(CSQA[[9]] != "(Unknown)",CSQA[[9]] != "None"),vars=CSQA[[9]])
+counts<- count(CSQA,vars=CSQA[[8]])
 percent<-prop.table(counts$n)
 df<-as.data.frame(counts)
 df$perc<-percent
@@ -671,9 +604,8 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
   
   df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
     geom_bar(stat="identity")+
-    geom_text_repel(aes(label=scales::percent(percent)),
-                    position=position_stack(vjust=0.55),
-                    box.padding = unit(0.5, "lines"))+
+    geom_text(aes(label=scales::percent(percent)),
+                    position=position_stack(vjust=0.55))+
     coord_flip()+
     labs(title=label,
          subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
@@ -684,8 +616,7 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
            axis.ticks = element_blank())
 ```
 
-In the above graphs we removed values where Audit Methods equaled "(Unknown)" and "None," as they do not show what actual methods were used and are caused by audits that were not performed or whose label.status was "Not in Scope." By removing those values we see a truer picture which shows just over 75% of audits are performed on Site. "TBD" values look to be audits that have not been performed and could similarly be removed, but due to the low value here is likely unnecessary. 
-
+Audit Method can help decision makers decide how to appropiately staff auditers and to see what capabilties they can invest into the future. 
 
 
 
@@ -726,45 +657,7 @@ df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
            axis.ticks = element_blank())
 ```
 
-While the data dictionary for this varibale is light on what information is being conveyed, intuitevely it looks to be dates of when audits were performed or are going to be performed. The graphs show a pretty even spread with a high in Q2 and a low in Q4. Depending on which quarter system this relies on, the seasonal variatiosn are likely due to regualtion on when and how audits are performed. To decision makers this can be useful as they know to staff audters higher in Q1-Q2 and can refocus workers in Q3 or train new workers during Q4. This variable can also use some cleaning.
-
-#### Proposed Quarter: Clean
-
-```{r Proposed Quarter:clean, echo=FALSE}
-label<-"Proposed Quarter"
-counts<- count(CSQA%>%filter(CSQA[[10]] != "(Unknown)"),vars=CSQA[[10]])
-percent<-prop.table(counts$n)
-df<-as.data.frame(counts)
-df$perc<-percent
-df
-df$dummy<-1
-df%>%ggplot(aes(x=dummy, y=-n,fill=vars))+
-    geom_bar(stat="identity")+
-    geom_text(aes(label=n),position=position_stack(vjust=0.5))+
-    coord_flip()+
-    labs(title=label,
-         subtitle=paste("GWP DataSet:","Counts of",label, sep=" "),
-         x=NULL)+
-    theme_fivethirtyeight()+
-    theme( axis.text.x = element_blank(),
-           axis.text.y = element_blank(),
-           axis.ticks = element_blank())
-  
-  df%>%ggplot(aes(x=dummy, y=-percent*100,fill=vars))+
-    geom_bar(stat="identity")+
-    geom_text(aes(label=scales::percent(percent)),position=position_stack(vjust=0.55))+
-    coord_flip()+
-    labs(title=label,
-         subtitle=paste("GWP DataSet:",label, "Percentages", sep=" "),
-         x=NULL)+
-    theme_fivethirtyeight()+
-    theme( axis.text.x = element_blank(),
-           axis.text.y = element_blank(),
-           axis.ticks = element_blank())
-```
-
-
-
+While the data dictionary for this varibale is light on what information is being conveyed, intuitevely it looks to be dates of when audits were performed or are going to be performed. Depending on which quarter system this relies on, the seasonal variatiosn are likely due to regualtion on when and how audits are performed. Q4 is missign which may suggest this is a newer dataset that hasn't existed durign a Q4 yet. To decision makers this can be useful as they know to staff audters higher in Q1 and Q3 and can refocus workers in Q4 or train new workers during Q4.
 
 
 
@@ -844,9 +737,9 @@ output%>%summary()
 
 ## WorkSheet Analysis: Part III
 
-  Without further information on the origin of the two datasets, I would recommend to not merge the two datasets. One reason is size diffrence of the two files. The GWP dataset has 96 rows versus the CSQA has 12 rows, which would mean the merged dataset would be overly influenced by the GWP dataset. Other reasons is the diffrence in the means for the diffrent variables. Along the simialr idea, the means and medians of several of the variables are not close, and therefore the GWP dataset woudl also have a large influence on a merged dataset.
+  Without further information on the origin of the two datasets, I would recommend to not merge the two datasets. One reason is size diffrence of the two files. The GWP dataset has 96 rows versus the CSQA has 12 rows, which would mean the merged dataset would be overly influenced by the GWP dataset. Other reasons is the diffrence in the means for the diffrent variables. Along the similar idea, the means and medians of several of the variables are not close, and therefore the GWP dataset woudl also have a large influence on a merged dataset.
 
-  While the above are reasons to not merge the datasets, it might be useful to merge them for the ease of data analysis. If the merged datasets contain an extra column with a variable indicating its origin, automated analysis would likely be easier as a simple filter can choose which data set to depict.
+  While the above are reasons to not merge the datasets, it might be useful to merge them for the ease of data analysis. If the merged datasets contain an extra column with a variable indicating its origin, automated analysis would likely be easier as a simple filter can choose which data set to depict. When merging it would be prudent to make sure all variables are labelled correctly in both data sets. For example the Audit Method and Audit Type are mislabelled in CSQA.
 
 
 
@@ -856,13 +749,8 @@ This project was made for ALY6000 as part of the Audit Analysis Project.
 
 Code can be found at https://github.com/Holt-Williams/AuditAnalysisProject 
 
+Librairies Utilized:
+tidyverse, rmarkdown, scales, stringr, ggrepel, readxl, ggthemes
+
 Thanks for reading!
 -G. Holt Williams
-
-
-
-
-
-
-
-
